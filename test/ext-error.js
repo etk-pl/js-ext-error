@@ -15,14 +15,14 @@ describe("ExtError", () => {
 	it("message", () => {
 		assert(err.message === "my message");
 	});
-	it("type", () => {
-		assert(err.type === "my type");
-	});
 	it("stack", () => {
 		assert(typeof err.stack === "string");
 	});
 	it("instanceof Error", () => {
 		assert(err instanceof Error);
+	});
+	it("toString", () => {
+		assert(err.toString() === "ExtError\n\tCode: my code\n\tMessage: my message\n");
 	});
 });
 describe("ExtError defaults", () => {
@@ -36,7 +36,7 @@ describe("ExtError defaults", () => {
 	it("message", () => {
 		assert(err.message === "");
 	});
-	it("type", () => {
-		assert(err.type === "");
+	it("toString", () => {
+		assert(err.toString() === "ExtError\n");
 	});
 });

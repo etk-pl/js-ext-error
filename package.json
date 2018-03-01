@@ -1,6 +1,6 @@
 {
   "name": "exterror",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Javascript Extended Error",
   "main": "index.js",
   "scripts": {
