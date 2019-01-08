@@ -4,8 +4,9 @@
 "use strict";
 const assert = require("assert");
 const ExtError = require("../");
+const err = new ExtError("my code", "my message", "my type");
 describe("ExtError", () => {
-	const err = new ExtError("my code", "my message", "my type");
+
 	it("name", () => {
 		assert(err.name === "ExtError");
 	});
@@ -15,8 +16,11 @@ describe("ExtError", () => {
 	it("message", () => {
 		assert(err.message === "my message");
 	});
-	it("stack", () => {
+	it("stack is string", () => {
 		assert(typeof err.stack === "string");
+	});
+	it("stack not includes ExtError", () => {
+		assert(!err.stack.includes('at new ExtError'));
 	});
 	it("instanceof Error", () => {
 		assert(err instanceof Error);

@@ -5,7 +5,6 @@
 
 /**
  * @property name
- * @property stack
  * @property code
  * @property message
  */
@@ -18,7 +17,6 @@ class ExtError extends Error {
 	constructor(code, message) {
 		super();
 		this.name = this.constructor.name;
-		this.stack = (new Error()).stack;
 		this.code = code || "";
 		this.message = message || "";
 	}
