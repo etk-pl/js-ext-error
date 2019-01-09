@@ -21,6 +21,10 @@ class ExtError extends Error {
 		this.message = message || "";
 	}
 
+	/**
+	 *
+	 * @returns {string}
+	 */
 	toString() {
 		const obj = Object(this);
 		if (obj !== this) {
@@ -40,6 +44,17 @@ class ExtError extends Error {
 			msg += "\tMessage: " + message + "\n";
 		}
 		return msg;
+	}
+
+	/**
+	 *
+	 * @returns {{code: string, message: string}}
+	 */
+	toJSON() {
+		return {
+			code: this.code,
+			message: this.message
+		};
 	}
 }
 
