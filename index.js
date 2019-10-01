@@ -69,8 +69,7 @@ class ExtError extends Error {
 	toJSON() {
 		return {
 			code: this.code,
-			message: this.message,
-			stack: this.stack
+			message: this.message
 		};
 	}
 }
