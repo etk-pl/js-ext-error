@@ -24,7 +24,7 @@ Returns object from error in structure like {code, message}
 ```js
 const errObj = {code:"ERR_EXAMPLE_CODE", message:"Test error message"};
 const err = ExtError.from(errObj);
-err.toJSON();
+console.log(err.toJSON());
 ```
 ***
 ## .toString()
@@ -32,6 +32,6 @@ err.toJSON();
 ```js
 const errObj = {code:"ERR_EXAMPLE_CODE", message:"Test error message"};
 const err = ExtError.from(errObj);
-err.toString();
+console.log(err.toString());
 ```
 ***
