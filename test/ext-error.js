@@ -5,9 +5,11 @@
 const assert = require("assert");
 const ExtError = require("../");
 const err = new ExtError("my code", "my message");
-const errObj = {code:"ERR_SAMPLE_ERROR", message: "ERROR_SAMPLE_MESSAGE"};
+const errObj = {
+	code: "ERR_SAMPLE_ERROR",
+	message: "ERROR_SAMPLE_MESSAGE"
+};
 describe("ExtError", () => {
-
 	it("name", () => {
 		assert(err.name === "ExtError");
 	});
@@ -30,33 +32,30 @@ describe("ExtError", () => {
 	it("toString", () => {
 		assert(err.toString() === "ExtError\n\tCode: my code\n\tMessage: my message\n");
 	});
-
-	it('should return new ExtError when called with error-like object', function () {
+	it("should return new ExtError when called with error-like object", function () {
 		assert(ExtError.from(errObj) instanceof ExtError);
 	});
-
-	it('should return new ExtError with provided message when called with error-like object', function () {
+	it("should return new ExtError with provided message when called with error-like object", function () {
 		assert.deepStrictEqual(ExtError.from(errObj).code, "ERR_SAMPLE_ERROR");
 	});
-
-	it('should return ExtError with message ERR_NOT_AN_ERRORLIKE when called without params', function () {
+	it("should return ExtError with message ERR_NOT_AN_ERRORLIKE when called without params", function () {
 		assert.deepStrictEqual(ExtError.from().code, "ERR_NOT_AN_ERRORLIKE");
 	});
-
-	it('should return ExtError with message ERR_NOT_AN_ERRORLIKE when called with number', function () {
+	it("should return ExtError with message ERR_NOT_AN_ERRORLIKE when called with number", function () {
 		assert.deepStrictEqual(ExtError.from(123).code, "ERR_NOT_AN_ERRORLIKE");
 	});
-
-	it('should return ExtError with message ERR_NOT_AN_ERRORLIKE when called with boolean', function () {
+	it("should return ExtError with message ERR_NOT_AN_ERRORLIKE when called with boolean", function () {
 		assert.deepStrictEqual(ExtError.from(false).code, "ERR_NOT_AN_ERRORLIKE");
 	});
-
-	it('should return ExtError with message ERR_NOT_AN_ERRORLIKE when called with string', function () {
-		assert.deepStrictEqual(ExtError.from("test").code, "ERR_NOT_AN_ERRORLIKE");
+	it("should return ExtError with code ERR_MISSING_ERROR_CODE and message equals to passed string when called with string", function () {
+		const str = "String error";
+		const err = ExtError.from(str);
+		assert.strictEqual(err.code, "ERR_MISSING_ERROR_CODE");
+		assert.strictEqual(err.message, str);
 	});
-
-	it('should return ExtError with message ERR_NOT_AN_ERRORLIKE when called with function', function () {
-		assert.deepStrictEqual(ExtError.from(() => {}).code, "ERR_NOT_AN_ERRORLIKE");
+	it("should return ExtError with message ERR_NOT_AN_ERRORLIKE when called with function", function () {
+		assert.deepStrictEqual(ExtError.from(() => {
+		}).code, "ERR_NOT_AN_ERRORLIKE");
 	});
 });
 describe("ExtError defaults", () => {

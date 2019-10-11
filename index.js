@@ -34,6 +34,9 @@ class ExtError extends Error {
 		if (error && typeof error === "object") {
 			return new ExtError(error.code, error.message, error.stack);
 		}
+		if (error && typeof error === "string") {
+			return new ExtError("ERR_MISSING_ERROR_CODE", error);
+		}
 		return new ExtError("ERR_NOT_AN_ERRORLIKE", "Value is not error-like");
 	}
 
@@ -42,10 +45,6 @@ class ExtError extends Error {
 	 * @returns {string}
 	 */
 	toString() {
-		const obj = Object(this);
-		if (obj !== this) {
-			throw new TypeError();
-		}
 		let name = this.name;
 		name = (name === undefined) ? "Error" : String(name);
 		let code = this.code;
