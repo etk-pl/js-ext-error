@@ -14,12 +14,14 @@ class ExtError extends Error {
 	 * @param code
 	 * @param message
 	 * @param stack
+	 * @param [data]
 	 */
-	constructor(code, message, stack) {
+	constructor(code, message, stack, data) {
 		super();
 		this.name = this.constructor.name;
 		this.code = code || "";
 		this.message = message || "";
+		this.data = data;
 		if (stack) {
 			this.stack = stack;
 		}
@@ -28,11 +30,12 @@ class ExtError extends Error {
 	/**
 	 * Creates new error from error-like object
 	 * @param {object} error Error-like object
+	 * @param [data]
 	 * @returns {ExtError}
 	 */
-	static from(error) {
+	static from(error, data) {
 		if (error && typeof error === "object") {
-			return new ExtError(error.code, error.message, error.stack);
+			return new ExtError(error.code, error.message, error.stack, data);
 		}
 		if (error && typeof error === "string") {
 			return new ExtError("ERR_MISSING_ERROR_CODE", error);
